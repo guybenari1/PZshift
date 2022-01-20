@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.submitShiftsController">
+    <children>
+        <TableView fx:id="weekTable" layoutY="265.0" prefHeight="0.0" prefWidth="600.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Shifts" />
+                <TableColumn prefWidth="75.0" text="Sunday" />
+                <TableColumn prefWidth="75.0" text="Monday" />
+                <TableColumn prefWidth="75.0" text="Tuesday" />
+                <TableColumn prefWidth="75.0" text="Wednesday" />
+                <TableColumn prefWidth="75.0" text="Thursday" />
+                <TableColumn prefWidth="75.0" text="Friday" />
+                <TableColumn prefWidth="75.0" text="Saturday" />
+            </columns>
+        </TableView>
+      <CheckBox layoutX="105.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="105.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="176.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="176.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="256.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="256.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="327.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="327.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="406.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="406.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="477.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="477.0" layoutY="358.0" mnemonicParsing="false" />
+      <CheckBox layoutX="557.0" layoutY="320.0" mnemonicParsing="false" />
+      <CheckBox layoutX="557.0" layoutY="358.0" mnemonicParsing="false" />
+      <Text layoutX="227.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="submit shifts" wrappingWidth="116.98175048828125">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+    </children>
+
+</AnchorPane>

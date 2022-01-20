@@ -1,18 +1,31 @@
 package main;
 
 
-import com.mongodb.client.*;
-import model.Email;
-import model.Worker;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+
+public class Main extends Application {
 
     public static void main(String[] args) {
-//        Worker guy = new Worker("guybenari123123@gmail.com");
-//        guy.sendCodeEmail();
-//        guy.sendTextEmail("hi guy");
-          System.out.println("aftererer");
+        launch(args);
+    }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            String pathName = "main/SB.fxml";
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 

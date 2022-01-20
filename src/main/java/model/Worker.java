@@ -17,6 +17,10 @@ public class Worker {
         setEmail(email);
     }
 
+    public Worker() {
+
+    }
+
     private void setEmail(String email){
         this.email = email;
         this.workerEmail = new Email(this.email);
