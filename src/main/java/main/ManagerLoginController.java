@@ -1,4 +1,88 @@
 package main;
 
-public class ManagerLoginController {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ManagerLoginController implements Initializable {
+    @FXML
+    private Text nameT = new Text();
+
+    public void messagesBTN(ActionEvent actionEvent){
+        try {
+            String pathName = "Messages.fxml";
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addEmployeeBTN(ActionEvent actionEvent){
+        try {
+            String pathName = "AddNewEmployee.fxml";
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void assignShiftsBTN(ActionEvent actionEvent){
+        try {
+            String pathName = "ShiftsAssignment.fxml";
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void salaryBTN(ActionEvent actionEvent){
+        try {
+            String pathName = "Salary.fxml";
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showFinancialBTN (){
+        JOptionPane.showMessageDialog(null, "show financial reports");
+    }
+
+    public void employeesDetailsBTN (){
+        JOptionPane.showMessageDialog(null, "show employees details");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.nameT.setText("Hello, "+ "guy");
+    }
+
 }

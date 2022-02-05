@@ -8,7 +8,7 @@ public class Worker {
     protected String phoneNumber;
     protected String id;
     protected String birthDate;
-    protected String job;
+   // protected String job;
     protected String password;
     protected int hours;
 

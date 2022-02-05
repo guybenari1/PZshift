@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            String pathName = "main/SB.fxml";
+            String pathName = "FirstScene.fxml";
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
