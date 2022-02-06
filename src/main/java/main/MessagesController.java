@@ -25,6 +25,7 @@ public class MessagesController implements Initializable {
             currentItemSelected = (String) employeesLV.getSelectionModel().getSelectedItem();
             if (checkIfChosen(currentItemSelected)) {
                 this.receiversLV.getItems().add(currentItemSelected);
+                this.employeesLV.getItems().remove(currentItemSelected);
             }
         }
     }
@@ -34,6 +35,7 @@ public class MessagesController implements Initializable {
             String currentItemSelected;
             currentItemSelected = (String) receiversLV.getSelectionModel().getSelectedItem();
             this.receiversLV.getItems().remove(currentItemSelected);
+            this.employeesLV.getItems().add(currentItemSelected);
         }
     }
 
@@ -48,13 +50,34 @@ public class MessagesController implements Initializable {
     }
 
     @FXML
-    void sendBTN(ActionEvent event) {
+    public void sendBTN(ActionEvent event) {
         int length = receiversLV.getItems().size();
         System.out.printf("you choose : %d people to get this message:\n", length);
         System.out.println(messageTA.getText());
         for (int i=1; i<=length; i++){
             System.out.printf("#%d receiver: %s\n",i,receiversLV.getItems().get(i));
         }
+    }
+
+    @FXML
+    public void addAllBTN(ActionEvent event) {
+        int length = this.employeesLV.getItems().size();
+        for (int i=length-1; i>=0; i--){
+            String currentItemSelected = (String) employeesLV.getItems().get(i);
+            this.employeesLV.getItems().remove(currentItemSelected);
+            this.receiversLV.getItems().add(currentItemSelected);
+        }
+    }
+
+    @FXML
+    public void clearAllBTN(ActionEvent event) {
+        int length = this.receiversLV.getItems().size();
+        for (int i=length-1; i>=0; i--){
+            String currentItemSelected = (String) receiversLV.getItems().get(i);
+            this.receiversLV.getItems().remove(currentItemSelected);
+            this.employeesLV.getItems().add(currentItemSelected);
+        }
+
     }
 
     @Override

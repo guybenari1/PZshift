@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -378,8 +379,10 @@ public class ShiftsAssignmentController implements Initializable {
             assignAP.setVisible(true);
             showAP.setVisible(false);
         }
+    }
 
-
+    public void publishBTN(){
+        JOptionPane.showMessageDialog(null, "shifts published");
     }
 
     @Override

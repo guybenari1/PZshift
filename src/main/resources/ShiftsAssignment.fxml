@@ -96,6 +96,11 @@
                   <Font size="26.0" />
                </font>
             </Text>
+            <Button layoutX="340.0" layoutY="328.0" mnemonicParsing="false" onAction="#showBTN" prefHeight="34.0" prefWidth="118.0" text="show">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="showAP" prefHeight="385.0" prefWidth="810.0" visible="false">
@@ -184,18 +189,18 @@
             </Text>
             <Text layoutX="18.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Morning" wrappingWidth="52.0" />
             <Text layoutX="18.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evening" wrappingWidth="52.0" />
+            <Button layoutX="610.0" layoutY="333.0" mnemonicParsing="false" onAction="#publishBTN" text="publish shifts">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="115.0" layoutY="334.0" mnemonicParsing="false" onAction="#showBTN" prefHeight="39.0" prefWidth="130.0" text="back">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <Button layoutX="573.0" layoutY="342.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" text="finish">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="170.0" layoutY="338.0" mnemonicParsing="false" onAction="#showBTN" prefHeight="34.0" prefWidth="118.0" text="show">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
    </children>
 
 </AnchorPane>
