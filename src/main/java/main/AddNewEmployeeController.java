@@ -5,9 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import model.DataBaseManager;
 import model.Email;
+import model.Manager;
+import model.Worker;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,21 +32,42 @@ public class AddNewEmployeeController {
 
     @FXML
     void sendCodeBTN(ActionEvent event) {
-        if(checkValidEmail(emailTF)){
-            Email email = new Email(emailTF.getText());
-            email.sendCodeByEmail();
-            JOptionPane.showMessageDialog(null, "Password sent to: "+emailTF.getText());
+       if(!managerCB.isSelected()){
+           Worker temp = new Worker(nameTF.getText(),idTF.getText(),phoneTf.getText(),birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),emailTF.getText());
+           workerProcess(event,temp);
+       }
+       Manager temp = new Manager(nameTF.getText(),idTF.getText(),phoneTf.getText(),birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),emailTF.getText());
+       workerProcess(event,temp);
+    }
 
+    private void workerProcess(ActionEvent event,Worker temp){
+        DataBaseManager manager = DataBaseManager.getDBInstance();
+        boolean valWorker = temp.checkValid(temp);
+        boolean existsAlready = manager.doesEmployeeExist(temp.getId());
+        if(Email.checkValidEmail(emailTF) && valWorker && !existsAlready){
+            Email email = new Email(emailTF.getText());
+            email.sendCodeByEmail(temp);
+            JOptionPane.showMessageDialog(null, "Password sent to: "+emailTF.getText());
         }
         else {
-            JOptionPane.showMessageDialog(null, "Sorry, invalid email. try again");
+            JOptionPane.showMessageDialog(null, "Sorry, We ran into a problem: ");
+            if(!valWorker){
+                JOptionPane.showMessageDialog(null, "Some data of the worker is invalid");
+            }
+            if(!Email.checkValidEmail(emailTF)){
+                JOptionPane.showMessageDialog(null, "The email is not valid");
+            }
+            if(existsAlready){
+                JOptionPane.showMessageDialog(null, "This worker is already employeed!");
+            }
         }
     }
 
-    private boolean checkValidEmail(TextField email){
-        //check if email is in the users DB in another method
-        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-        Matcher mat = pattern.matcher(email.getText());
-        return mat.matches();
+    private void sendMail(){
+
     }
+
+
+
+
 }

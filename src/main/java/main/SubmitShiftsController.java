@@ -1,7 +1,12 @@
 package main;
 
+import Shift_Commander.Shift;
+import Shift_Commander.ShiftHandler;
+import Shift_Commander.addShift;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import model.DataBaseManager;
 
 import javax.swing.*;
 
@@ -36,7 +41,33 @@ public class SubmitShiftsController {
     private CheckBox satECB = new CheckBox();
 
 
+
+
     public void submitBTN(){
+        Boolean[] choiceArr= new Boolean[14];
+        choiceArr[0] = sunMCB.isSelected();
+        choiceArr[1] = sunECB.isSelected();
+        choiceArr[2] = monMCB.isSelected();
+        choiceArr[3] =monECB.isSelected();
+        choiceArr[4] =tueMCB.isSelected();
+        choiceArr[5]=tueECB.isSelected();
+        choiceArr[6]=wedMCB.isSelected();
+        choiceArr[7]=wedECB.isSelected();
+        choiceArr[8]=thuMCB.isSelected();
+        choiceArr[9]=thuECB.isSelected();
+        choiceArr[10]=friMCB.isSelected();
+        choiceArr[11]=friECB.isSelected();
+        choiceArr[12]=satMCB.isSelected();
+        choiceArr[13]=satECB.isSelected();
+        ShiftHandler handler = new ShiftHandler();
+        for (int i=0; i<14 ; i++){
+            if(choiceArr[i]){
+                Shift temp = new Shift(i,DataBaseManager.getDBInstance().getUser());
+                addShift tempo = new addShift(temp);
+                handler.takeRequest(tempo);
+            }
+        }
+        handler.placeRequests();
         JOptionPane.showMessageDialog(null, "shifts submitted");
     }
 }
