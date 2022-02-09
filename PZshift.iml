@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -11,9 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
     <orderEntry type="library" name="javafx" level="application" />
     <orderEntry type="module-library">
@@ -74,11 +72,50 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="zmanim-1.4.0alpha" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.mongodb:bson:4.0.5" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
     <orderEntry type="library" exported="" name="lib1" level="project" />
     <orderEntry type="library" exported="" name="javax.mail1" level="project" />
     <orderEntry type="library" exported="" name="controlsfx-8.40.12" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/forPZ/jaf-1.1.1/activation.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/forPZ/javamail-1.4.5/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/forPZ/javamail-1.4.5/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/forPZ/javamail-1.4.5/mail.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/forPZ/zmanim-2.3.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:bson:4.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
   </component>
 </module>

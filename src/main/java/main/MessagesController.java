@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import model.DataBaseManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,11 +53,7 @@ public class MessagesController implements Initializable {
     @FXML
     public void sendBTN(ActionEvent event) {
         int length = receiversLV.getItems().size();
-        System.out.printf("you choose : %d people to get this message:\n", length);
-        System.out.println(messageTA.getText());
-        for (int i=1; i<=length; i++){
-            System.out.printf("#%d receiver: %s\n",i,receiversLV.getItems().get(i));
-        }
+        //send messages
     }
 
     @FXML
@@ -82,7 +79,6 @@ public class MessagesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.employeesLV.getItems().addAll("guy ben ari", "dor daniel", "gali galgali"
-                , "omer tsur", "david davidan", "inbal boli", "raz magori", "elad eldadi");
+        this.employeesLV.getItems().addAll(DataBaseManager.getDBInstance().getWorkerNames());
     }
 }

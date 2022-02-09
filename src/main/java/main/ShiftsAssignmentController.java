@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.DataBaseManager;
 
 import javax.swing.*;
 import java.net.URL;
@@ -387,14 +388,19 @@ public class ShiftsAssignmentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //call func shiftSignUp here, for day field, 0 for sunday, 1 for monday ect. for shift field 0 for morning 1 for evening.
-        this.sunMLV.getItems().addAll("gur goldshteen", "dor daniel", "gali galgali"
-                , "omer tsur", "david davidan", "dor kairy", "raz magori", "elad eldadi");
-        this.sunELV.getItems().addAll("guy ben ari", "dor arviv", "gali galgali"
-                , "erez galil", "david davidan", "inbal boli");
-        this.wedMLV.getItems().addAll( "gali galgali"
-                , "omer tsur", "gilat ben gurion", "inbal boli", "raz magori", "elad eldadi");
-        this.friELV.getItems().addAll("guy ben ari", "dor daniel", "gali galgali"
-                , "inbal boli", "samy sumsum", "elad eldadi");
+        this.sunMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(0,0));
+        this.sunELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(0,1));
+        this.monMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(1,0));
+        this.monELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(1,1));
+        this.tueMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(2,0));
+        this.tueELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(2,1));
+        this.wedMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(3,0));
+        this.wedELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(3,1));
+        this.thuMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(4,0));
+        this.thuELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(4,1));
+        this.friMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(5,0));
+        this.friELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(5,1));
+        this.satMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(6,0));
+        this.satELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(6,1));
     }
 }

@@ -41,9 +41,6 @@ public class SubmitShiftsController {
     @FXML
     private CheckBox satECB = new CheckBox();
 
-
-
-
     public void submitBTN(){
         Boolean[] choiceArr= new Boolean[14];
         choiceArr[0] = sunMCB.isSelected();
@@ -73,7 +70,6 @@ public class SubmitShiftsController {
         }catch (MongoException err){
             System.err.println("Program ran into error: "+err);
         }
-
         JOptionPane.showMessageDialog(null, "shifts submitted");
     }
 }

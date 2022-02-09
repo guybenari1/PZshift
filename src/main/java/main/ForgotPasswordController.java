@@ -31,11 +31,10 @@ public class ForgotPasswordController {
             Worker temp=new Worker(emailTF.getText());
             email.sendCodeByEmail(temp);
             manager.updatePassword(s,temp.getPassword());
+            JOptionPane.showMessageDialog(null,"New password sent to you");
         }catch (MongoException err){
             System.err.println("System ran into an error: " +err);
         }
-        JOptionPane.showMessageDialog(null,"New password sent to you");
-        //actually  mail password
     }
 
 }

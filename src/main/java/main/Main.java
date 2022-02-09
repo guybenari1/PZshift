@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DataBaseManager;
 
 
 public class Main extends Application {
@@ -17,15 +18,28 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try {
-            String pathName = "FirstScene.fxml";
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        if (DataBaseManager.getDBInstance().noUsers()) {
+            try {
+                String pathName = "AddNewEmployee.fxml";
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        else {
+            try {
+                String pathName = "FirstScene.fxml";
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

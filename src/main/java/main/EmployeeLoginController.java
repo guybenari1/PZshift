@@ -43,33 +43,45 @@ public class EmployeeLoginController implements Initializable {
         try {
             DataBaseManager manager = DataBaseManager.getDBInstance();
             ArrayList<String> phoneBook = manager.getPhoneBook();
+            String contacts = "";
+            for (String s : phoneBook) {
+                contacts += s+"\n";
+            }
+            JOptionPane.showMessageDialog(null, contacts);
         } catch (MongoException  err){
             System.err.println("Progarm ran into the error: " + err);
         }
-        //just print here
-        JOptionPane.showMessageDialog(null, "print phone book");
+
     }
 
     public void showHoursBTN (){
         try {
             DataBaseManager manager = DataBaseManager.getDBInstance();
             String result = manager.getHoursForEmp(manager.getUser());
-            //display result.
+            JOptionPane.showMessageDialog(null, result);
+
         }catch (MongoException err){
             System.err.println("Program ran into an error: "+ err);
         }
         JOptionPane.showMessageDialog(null, "print hours");
     }
 
-    public void nextWeekBTN (){
-        try{
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            ArrayList<String> toDisplay = manager.getNextWeek(manager.getUser());
-        }catch (MongoException err){
-            System.err.println("System ran into an error "+ err);
+    public void nextWeekBTN () {
+        if (!DataBaseManager.getDBInstance().nextWeekExists()) {
+            JOptionPane.showMessageDialog(null, "there are no weeks for next week yet");
+        } else {
+            try {
+                DataBaseManager manager = DataBaseManager.getDBInstance();
+                ArrayList<String> toDisplay = manager.getNextWeek(manager.getUser());
+                String shifts = "";
+                for (String s : toDisplay) {
+                    shifts += s + "\n";
+                }
+                JOptionPane.showMessageDialog(null, shifts);
+            } catch (MongoException err) {
+                System.err.println("System ran into an error " + err);
+            }
         }
-        //display
-        JOptionPane.showMessageDialog(null, "print next week shift (if any)");
     }
 
     @Override
