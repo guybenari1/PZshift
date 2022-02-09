@@ -39,6 +39,7 @@ public class FirstSceneController {
                 //show incorrect entry
             }else{
                 manager.changeUser(manager.getEmployeeName(emailTF.getText()));
+                manager.get_CurrentWeek();
                 valid = manager.isManager(emailTF.getText());
                 if(!valid){
                     employeeLogin(actionEvent);

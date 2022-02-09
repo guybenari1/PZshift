@@ -33,6 +33,17 @@ public class DataBaseManager {
         return _Instance;
     }
 
+    public LocalDate get_CurrentWeek(){
+        MongoCollection<Document> WorkSchedule = _Instance.databaseConnection.getCollection("WorkSchedule");
+        Document check = WorkSchedule.find().sort(Sorts.descending("week start date")).first();
+        if(check == null){
+            _CurrentWeek = LocalDate.now();
+        } else {
+            _CurrentWeek =check.get("week start date", LocalDate.class);
+        }
+        return _CurrentWeek;
+    }
+
     public void insertEmployee(Worker temp){
         MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
         Document workerDoc = new Document("_id",temp.getId()).append("name",temp.getName()).append("salary",temp.getSalary()).append("email",temp.getEmail()).append("phone number",temp.getPhoneNumber()).append("id",temp.getId()).append("birthday",temp.getBirthDate()).append("job",temp.job);
@@ -79,6 +90,62 @@ public class DataBaseManager {
         }
        return true;
     }
+
+
+
+
+    public void addWeekFinalChart(){
+        MongoCollection<Document> WorkSchedule= _Instance.databaseConnection.getCollection("WorkSchedule");
+        Document document = new Document();
+        List<Document> week = new ArrayList<>();
+        Document Sunday = new Document();
+        List<String> SundayMorning  = new ArrayList<>();
+        List<String> SundayEvening = new ArrayList<>();
+        Sunday.put("Morning",SundayMorning);
+        Sunday.put("Evening",SundayEvening);
+        week.add(Sunday);
+        Document Monday = new Document();
+        List<String> MondayMorning  = new ArrayList<>();
+        List<String> MondayEvening = new ArrayList<>();
+        Monday.put("Morning",MondayMorning);
+        Monday.put("Evening",MondayEvening);
+        week.add(Monday);
+        Document Tuesday = new Document();
+        List<String> TuesdayMorning  = new ArrayList<>();
+        List<String> TuesdayEvening = new ArrayList<>();
+        Tuesday.put("Morning",TuesdayMorning);
+        Tuesday.put("Evening",TuesdayEvening);
+        week.add(Tuesday);
+        Document Wednesday = new Document();
+        List<String> WednesdayMorning  = new ArrayList<>();
+        List<String> WednesdayEvening = new ArrayList<>();
+        Wednesday.put("Morning",WednesdayMorning);
+        Wednesday.put("Evening",WednesdayEvening);
+        week.add(Wednesday);
+        Document thursday = new Document();
+        List<String> thursdayMorning  = new ArrayList<>();
+        List<String> thursdayEvening = new ArrayList<>();
+        thursday.put("Morning",thursdayMorning);
+        thursday.put("Evening",thursdayEvening);
+        week.add(thursday);
+        Document friday = new Document();
+        List<String> fridayMorning  = new ArrayList<>();
+        List<String> fridayEvening = new ArrayList<>();
+        friday.put("Morning",fridayMorning);
+        friday.put("Evening",fridayEvening);
+        week.add(friday);
+        Document saturday = new Document();
+        List<String> saturdayMorning  = new ArrayList<>();
+        List<String> saturdayEvening = new ArrayList<>();
+        saturday.put("Morning",saturdayMorning);
+        saturday.put("Evening",saturdayEvening);
+        week.add(saturday);
+        document.put("Week", week);
+        LocalDate f = _CurrentWeek.plusWeeks(1);
+        document.put("week start date", f);
+        WorkSchedule.insertOne(document);
+    }
+
 
     private void insertWeekRequestChart(){
         MongoCollection<Document> weeksRequest =_Instance.databaseConnection.getCollection("WeeksRequest");
@@ -267,7 +334,7 @@ public class DataBaseManager {
 
     public ArrayList<String> getWorkerNames() {
         MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
-        MongoCursor<Document> workIt = Workers.find().iterator();
+        MongoCursor<Document> workIt = Workers.find(Filters.eq("job","Worker")).iterator();
         ArrayList<String> resultSet = new ArrayList<String>();
         while(workIt.hasNext()){
             Document curr = workIt.next();

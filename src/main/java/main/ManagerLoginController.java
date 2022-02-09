@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.DataBaseManager;
 
 import javax.swing.*;
 import java.net.URL;
@@ -47,6 +48,9 @@ public class ManagerLoginController implements Initializable {
 
     public void assignShiftsBTN(ActionEvent actionEvent){
         try {
+            if(!DataBaseManager.getDBInstance().nextWeekExists()){
+                DataBaseManager.getDBInstance().addWeekFinalChart();
+            }
             String pathName = "ShiftsAssignment.fxml";
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(pathName));
             Scene scene = new Scene(root);
