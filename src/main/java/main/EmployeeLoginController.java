@@ -1,5 +1,6 @@
 package main;
 
+import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.DataBaseManager;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeLoginController implements Initializable {
@@ -37,14 +40,29 @@ public class EmployeeLoginController implements Initializable {
     }
 
     public void phonebookBTN (){
+        try {
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            ArrayList<String> phoneBook = manager.getPhoneBook();
+        } catch (MongoException  err){
+            System.err.println("Progarm ran into the error: " + err);
+        }
+        //just print here
         JOptionPane.showMessageDialog(null, "print phone book");
     }
 
     public void showHoursBTN (){
+        try {
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            String result = manager.getHoursForEmp(manager.getUser());
+            //display result.
+        }catch (MongoException err){
+            System.err.println("Program ran into an error: "+ err);
+        }
         JOptionPane.showMessageDialog(null, "print hours");
     }
 
     public void nextWeekBTN (){
+
         JOptionPane.showMessageDialog(null, "print next week shift (if any)");
     }
 

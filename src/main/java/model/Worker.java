@@ -33,7 +33,11 @@ public class Worker {
         int valid = 0;
         valid += validHelper(toCheck.getId(), 9);
         valid += validHelper(toCheck.getPhoneNumber(), 10);
-        valid += yearHelper(toCheck.getBirthDate());
+        try{
+            valid += yearHelper(toCheck.getBirthDate());
+        } catch (NullPointerException e){
+            return false;
+        }
         return valid <= 0;
     }
 
@@ -77,7 +81,7 @@ public class Worker {
         return hours;
     }
 
-    private int yearHelper(String date){
+    private int yearHelper(String date) throws NullPointerException{
         int temp = Integer.getInteger(date.substring(0,3));
         int current = LocalDate.now().getYear();
         if(current-temp < 18){

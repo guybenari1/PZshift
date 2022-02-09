@@ -1,5 +1,6 @@
 package main;
 
+import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,17 +32,22 @@ public class FirstSceneController {
         }
     }
     public void loginBTN(ActionEvent actionEvent){
-        DataBaseManager manager = DataBaseManager.getDBInstance();
-        boolean valid = manager.validLogin(emailTF.getText(),passwordTF.getText());
-        if(!valid){
-            //show incorrect entry
+        try{
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            boolean valid = manager.validLogin(emailTF.getText(),passwordTF.getText());
+            if(!valid){
+                //show incorrect entry
+            }
+            manager.changeUser(manager.getEmployeeName(emailTF.getText()));
+            valid = manager.isManager(emailTF.getText());
+            if(!valid){
+                employeeLogin(actionEvent);
+            }
+            managerLogin(actionEvent);
+        }catch (MongoException err){
+            System.err.println("Progarm ran into the error: " + err);
         }
-        manager.changeUser(manager.getEmployeeName(emailTF.getText()));
-        valid = manager.isManager(emailTF.getText());
-        if(!valid){
-            employeeLogin(actionEvent);
-        }
-        managerLogin(actionEvent);
+
     }
 
 
