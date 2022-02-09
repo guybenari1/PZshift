@@ -37,13 +37,14 @@ public class FirstSceneController {
             boolean valid = manager.validLogin(emailTF.getText(),passwordTF.getText());
             if(!valid){
                 //show incorrect entry
-            }
-            manager.changeUser(manager.getEmployeeName(emailTF.getText()));
-            valid = manager.isManager(emailTF.getText());
-            if(!valid){
-                employeeLogin(actionEvent);
             }else{
-                managerLogin(actionEvent);
+                manager.changeUser(manager.getEmployeeName(emailTF.getText()));
+                valid = manager.isManager(emailTF.getText());
+                if(!valid){
+                    employeeLogin(actionEvent);
+                }else{
+                    managerLogin(actionEvent);
+                }
             }
         }catch (MongoException err){
             System.err.println("Progarm ran into the error: " + err);

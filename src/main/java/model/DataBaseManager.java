@@ -19,6 +19,7 @@ public class DataBaseManager {
     private static DataBaseManager _Instance = null;
     private final MongoDatabase databaseConnection;
     private static String _User;
+    private static LocalDate _CurrentWeek;
 
     private DataBaseManager(){
         MongoClient client = MongoClients.create("mongodb+srv://GuyBenAri:1qaz2WSX3edc@pzshift.sxxqo.mongodb.net/PZshift?retryWrites=true&w=majority");
@@ -206,7 +207,7 @@ public class DataBaseManager {
 
     public ArrayList<String> getPhoneBook(){
         MongoCollection<Document>Workers =_Instance.databaseConnection.getCollection("Workers");
-        Bson projectionFields = Projections.fields(Projections.include("name","phone number"),Projections.excludeId(),Projections.exclude("salary","email","id","birthday","job"));
+        Bson projectionFields = Projections.fields(Projections.include("name","phone number"),Projections.exclude("_id","salary","email","id","birthday","job"));
         MongoCursor<Document> cursor = Workers.find().projection(projectionFields).sort(Sorts.descending("name")).iterator();
         ArrayList<String> resultSet = new ArrayList<String>();
         while(cursor.hasNext()){
@@ -233,7 +234,7 @@ public class DataBaseManager {
         String s = "";
         ArrayList<String> fin =new ArrayList<String>();
         MongoCollection<Document> WorkSchedle =_Instance.databaseConnection.getCollection("WorkSchedule");
-        Document target = WorkSchedle.find(Filters.eq("week start date",LocalDate.now().plusWeeks(1))).first();
+        Document target = WorkSchedle.find(Filters.eq("week start date", _CurrentWeek.plusWeeks(1))).first();
         List<Document> week = target.getList("week",Document.class);
         for(int i=0; i<week.size();i++){
             for (int j=0; j<2;j++){
@@ -245,6 +246,24 @@ public class DataBaseManager {
 
         }
         return fin;
+    }
+
+    public boolean nextWeekExists(){
+        MongoCollection<Document> WorkSchedle =_Instance.databaseConnection.getCollection("WorkSchedule");
+        Document target = WorkSchedle.find(Filters.eq("week start date",_CurrentWeek.plusWeeks(1))).first();
+        if(target == null){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean noUsers(){
+        MongoCollection<Document>Workers =_Instance.databaseConnection.getCollection("Workers");
+        Document target = Workers.find().first();
+        if(target== null){
+            return true;
+        }
+        return false;
     }
 
     public void updatePassword(String workerName, String pass){
