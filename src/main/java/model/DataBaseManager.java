@@ -207,8 +207,7 @@ public class DataBaseManager {
 
     public ArrayList<String> getPhoneBook(){
         MongoCollection<Document>Workers =_Instance.databaseConnection.getCollection("Workers");
-        Bson projectionFields = Projections.fields(Projections.include("name","phone number"),Projections.exclude("_id","salary","email","id","birthday","job"));
-        MongoCursor<Document> cursor = Workers.find().projection(projectionFields).sort(Sorts.descending("name")).iterator();
+        MongoCursor<Document> cursor = Workers.find().sort(Sorts.descending("name")).iterator();
         ArrayList<String> resultSet = new ArrayList<String>();
         while(cursor.hasNext()){
             String s =  "";
