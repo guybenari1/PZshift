@@ -13,6 +13,7 @@ import org.bson.conversions.Bson;
 import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DataBaseManager {
@@ -33,15 +34,14 @@ public class DataBaseManager {
         return _Instance;
     }
 
-    public LocalDate get_CurrentWeek(){
+    public void get_CurrentWeek() {
         MongoCollection<Document> WorkSchedule = _Instance.databaseConnection.getCollection("WorkSchedule");
         Document check = WorkSchedule.find().sort(Sorts.descending("week start date")).first();
-        if(check == null){
+        if (check == null) {
             _CurrentWeek = LocalDate.now();
         } else {
-            _CurrentWeek =check.get("week start date", LocalDate.class);
+            _CurrentWeek = check.get("week start date", LocalDate.class);
         }
-        return _CurrentWeek;
     }
 
     public void insertEmployee(Worker temp){
@@ -91,7 +91,19 @@ public class DataBaseManager {
        return true;
     }
 
-
+    public void addWorkersToShift(int dayOfWeek, int shiftTime, List<String> workers){
+        String[] shift = {"Morning","Evening"};
+        Iterator<String> workerIt= workers.iterator();
+        MongoCollection<Document> WorkSchedule= _Instance.databaseConnection.getCollection("WorkSchedule");
+        Document target = WorkSchedule.find(Filters.eq("week start date",_CurrentWeek.plusWeeks(1))).first();
+        List<Document> week = target.getList("week",Document.class);
+        Document targetDay = week.get(dayOfWeek);
+        List<String> targetShift = targetDay.getList(shiftTime,String.class);
+        while(workerIt.hasNext()){
+            Bson update = Updates.addToSet(shift[shiftTime],workerIt.next());
+            WorkSchedule.updateOne(targetDay,update);
+        }
+    }
 
 
     public void addWeekFinalChart(){
@@ -371,6 +383,30 @@ public class DataBaseManager {
             fin.add(s);
         }
         return fin;
+    }
+
+    public ArrayList<String> getMessages(){
+        String workerName = _User;
+        ArrayList<String> messagesFinal = new ArrayList<String>();
+        MongoCollection<Document> messages = _Instance.databaseConnection.getCollection("Messages");
+        MongoCursor<Document> mine = messages.find().iterator();
+        while(mine.hasNext()){
+            Document curr = mine.next();
+            List<String> targets = curr.getList("recipient",String.class);
+            if(targets.contains(workerName)){
+                messagesFinal.add(curr.getString("content"));
+            }
+        }
+        return messagesFinal;
+    }
+
+    public void sendMessage(List<String> recivers, String body){
+        MongoCollection<Document> messages = _Instance.databaseConnection.getCollection("Messages");
+        Document newMessage = new Document();
+        newMessage.put("Recipient",recivers);
+        newMessage.put("date",LocalDate.now());
+        newMessage.put("content",body);
+        messages.insertOne(newMessage);
     }
 
 }

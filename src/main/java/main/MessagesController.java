@@ -1,5 +1,6 @@
 package main;
 
+import com.mongodb.MongoException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,9 @@ import javafx.scene.input.MouseEvent;
 import model.DataBaseManager;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -52,8 +56,17 @@ public class MessagesController implements Initializable {
 
     @FXML
     public void sendBTN(ActionEvent event) {
-        int length = receiversLV.getItems().size();
-        //send messages
+        try{
+            int length = receiversLV.getItems().size();
+            ArrayList<String> recipientList = new ArrayList<>();
+            for(int i=0; i<length;i++){
+                recipientList.add(receiversLV.getItems().get(i).toString());
+            }
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            manager.sendMessage(recipientList,messageTA.getText());
+        }catch (MongoException err){
+            System.err.println("The system ran into an error :"+err);
+        }
     }
 
     @FXML

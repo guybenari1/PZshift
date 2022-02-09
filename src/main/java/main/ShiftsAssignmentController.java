@@ -1,5 +1,6 @@
 package main;
 
+import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -383,7 +384,25 @@ public class ShiftsAssignmentController implements Initializable {
     }
 
     public void publishBTN(){
-        JOptionPane.showMessageDialog(null, "shifts published");
+        try{
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            manager.addWorkersToShift(0,0,this.sunMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(0,1,this.sunELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(1,0,this.monMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(1,1,this.monELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(2,0,this.tueMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(2,1,this.tueELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(3,0,this.wedMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(3,1,this.wedELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(4,0,this.thuMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(4,1,this.thuELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(5,0,this.friMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(5,1,this.friELVSub.getItems().stream().toList());
+            manager.addWorkersToShift(6,0,this.satMLVSub.getItems().stream().toList());
+            manager.addWorkersToShift(6,1,this.satELVSub.getItems().stream().toList());
+        } catch (MongoException err){
+            System.err.println("System ran into an error "+ err);
+        }
     }
 
     @Override
