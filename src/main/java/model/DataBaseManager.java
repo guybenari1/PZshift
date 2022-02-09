@@ -266,11 +266,44 @@ public class DataBaseManager {
         return false;
     }
 
+    public ArrayList<String> getWorkerNames() {
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        MongoCursor<Document> workIt = Workers.find().iterator();
+        ArrayList<String> resultSet = new ArrayList<String>();
+        while(workIt.hasNext()){
+            Document curr = workIt.next();
+            String name = curr.getString("name");
+            resultSet.add(name);
+        }
+        return resultSet;
+    }
     public void updatePassword(String workerName, String pass){
         MongoCollection<Document> users = _Instance.databaseConnection.getCollection("Users");
         Document person  = users.find(Filters.eq("name",workerName)).first();
         Bson updatesC = Updates.combine( Updates.set("password",pass));
         users.updateOne(person,updatesC);
+    }
+
+    public void updateSalary(String workerName, String Newsalary){
+        MongoCollection<Document> workers= _Instance.databaseConnection.getCollection("Workers");
+        Document person = workers.find(Filters.eq("name",workerName)).first();
+        Bson updates = Updates.set("salary",Newsalary);
+        workers.updateOne(person,updates);
+    }
+
+    public ArrayList<String> shiftSignUp(int day, int shift){
+        String[] days ={"Sunday", "Monday", "Tuesday", "Wendsday","Thursday","Friday","Saturday"};
+        String[] times = {"Morning","Evening"};
+        ArrayList<String> fin =new ArrayList<String>();
+        MongoCollection<Document> WorkSchedle =_Instance.databaseConnection.getCollection("WorkSchedule");
+        Document target = WorkSchedle.find(Filters.eq("week start date", _CurrentWeek.plusWeeks(1))).first();
+        List<Document> week = target.getList("week",Document.class);
+        List<String> temp = week.get(day).getList(times[shift],String.class);
+        for(int i=0; i<temp.size();i++){
+            String s = temp.get(i);
+            fin.add(s);
+        }
+        return fin;
     }
 
 }

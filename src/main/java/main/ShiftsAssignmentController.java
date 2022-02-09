@@ -387,6 +387,7 @@ public class ShiftsAssignmentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //call func shiftSignUp here, for day field, 0 for sunday, 1 for monday ect. for shift field 0 for morning 1 for evening.
         this.sunMLV.getItems().addAll("gur goldshteen", "dor daniel", "gali galgali"
                 , "omer tsur", "david davidan", "dor kairy", "raz magori", "elad eldadi");
         this.sunELV.getItems().addAll("guy ben ari", "dor arviv", "gali galgali"
