@@ -82,7 +82,7 @@ public class Worker {
     }
 
     private int yearHelper(String date) throws NullPointerException{
-        int temp = Integer.getInteger(date.substring(0,3));
+        int temp = Integer.parseInt(date.substring(0,4));
         int current = LocalDate.now().getYear();
         if(current-temp < 18){
             return 1;

@@ -47,12 +47,12 @@ public class AddNewEmployeeController {
         boolean existsAlready = manager.doesEmployeeExist(temp.getId());
         if(Email.checkValidEmail(emailTF) && valWorker && !existsAlready){
             try{
+                Email email = new Email(emailTF.getText());
+                email.sendCodeByEmail(temp);
                 manager.insertEmployee(temp);
             }catch (MongoException err){
                 System.err.println("Program ran into error: " + err);
             }
-            Email email = new Email(emailTF.getText());
-            email.sendCodeByEmail(temp);
             JOptionPane.showMessageDialog(null, "Password sent to: "+emailTF.getText());
         }
         else {

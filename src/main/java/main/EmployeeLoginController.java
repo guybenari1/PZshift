@@ -62,7 +62,13 @@ public class EmployeeLoginController implements Initializable {
     }
 
     public void nextWeekBTN (){
-
+        try{
+            DataBaseManager manager = DataBaseManager.getDBInstance();
+            ArrayList<String> toDisplay = manager.getNextWeek(manager.getUser());
+        }catch (MongoException err){
+            System.err.println("System ran into an error "+ err);
+        }
+        //display
         JOptionPane.showMessageDialog(null, "print next week shift (if any)");
     }
 

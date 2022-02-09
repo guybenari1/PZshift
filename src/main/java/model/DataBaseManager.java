@@ -10,6 +10,7 @@ import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -224,6 +225,33 @@ public class DataBaseManager {
         Document target = Hours.find(Filters.eq("name",workerName)).filter(Filters.eq("Month",getMonth())).first();
         String hours = target.getString("total hours");
         return  hours;
+    }
+
+    public ArrayList<String> getNextWeek(String workerName){
+        String[] days ={"Sunday", "Monday", "Tuesday", "Wendsday","Thursday","Friday","Saturday"};
+        String[] times = {"Morning","Evening"};
+        String s = "";
+        ArrayList<String> fin =new ArrayList<String>();
+        MongoCollection<Document> WorkSchedle =_Instance.databaseConnection.getCollection("WorkSchedule");
+        Document target = WorkSchedle.find(Filters.eq("week start date",LocalDate.now().plusWeeks(1))).first();
+        List<Document> week = target.getList("week",Document.class);
+        for(int i=0; i<week.size();i++){
+            for (int j=0; j<2;j++){
+                if(week.get(i).getList(j,String[].class).contains(workerName)){
+                    s += days[i] + " " + times[j];
+                    fin.add(s);
+                }
+            }
+
+        }
+        return fin;
+    }
+
+    public void updatePassword(String workerName, String pass){
+        MongoCollection<Document> users = _Instance.databaseConnection.getCollection("Users");
+        Document person  = users.find(Filters.eq("name",workerName)).first();
+        Bson updatesC = Updates.combine( Updates.set("password",pass));
+        users.updateOne(person,updatesC);
     }
 
 }
