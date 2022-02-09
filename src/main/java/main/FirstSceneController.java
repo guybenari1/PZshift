@@ -42,8 +42,9 @@ public class FirstSceneController {
             valid = manager.isManager(emailTF.getText());
             if(!valid){
                 employeeLogin(actionEvent);
+            }else{
+                managerLogin(actionEvent);
             }
-            managerLogin(actionEvent);
         }catch (MongoException err){
             System.err.println("Progarm ran into the error: " + err);
         }

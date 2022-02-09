@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.DataBaseManager;
 import model.Email;
+import model.Worker;
 import org.bson.Document;
 
 import javax.swing.*;
@@ -26,7 +27,10 @@ public class ForgotPasswordController {
             if(s==null){
                 //doesn't exist in system
             }
-
+            Email email = new Email(emailTF.getText());
+            Worker temp=new Worker(emailTF.getText());
+            email.sendCodeByEmail(temp);
+            manager.updatePassword(s,temp.getPassword());
         }catch (MongoException err){
             System.err.println("System ran into an error: " +err);
         }
