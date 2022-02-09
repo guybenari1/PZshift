@@ -3,6 +3,7 @@ package main;
 import Shift_Commander.Shift;
 import Shift_Commander.ShiftHandler;
 import Shift_Commander.addShift;
+import com.mongodb.MongoException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -67,7 +68,12 @@ public class SubmitShiftsController {
                 handler.takeRequest(tempo);
             }
         }
-        handler.placeRequests();
+        try{
+            handler.placeRequests();
+        }catch (MongoException err){
+            System.err.println("Program ran into error: "+err);
+        }
+
         JOptionPane.showMessageDialog(null, "shifts submitted");
     }
 }

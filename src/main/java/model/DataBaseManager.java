@@ -51,7 +51,7 @@ public class DataBaseManager {
         return res.toLowerCase();
     }
 
-    public void insertHours(int workerID,String workerName, int newHours ){
+    public void insertHours(String workerID,String workerName, int newHours ){
         MongoCollection<Document> hours = _Instance.databaseConnection.getCollection("Hours");
         Document target = hours.find(Filters.eq("_id",workerID)).filter(Filters.eq("Month",getMonth())).first();
         if(target == null){
@@ -141,7 +141,10 @@ public class DataBaseManager {
             Bson updates2 = Updates.combine((Updates.pull(time,workerName)));
             weeksRequest.updateOne(target2,updates2);
         }
-
+        MongoCollection<Document> Workers  =_Instance.databaseConnection.getCollection("Workers");
+        Document idHelper = Workers.find(Filters.eq("name", workerName)).first();
+        String id = idHelper.getString("id");
+        insertHours(id,workerName,8);
     }
 
     public void changeShift(Shift.Shifttype type,String workerName, int addOrRemove){
@@ -199,5 +202,29 @@ public class DataBaseManager {
     }
 
     public String getUser(){return _User;}
+
+    public ArrayList<String> getPhoneBook(){
+        MongoCollection<Document>Workers =_Instance.databaseConnection.getCollection("Workers");
+        Bson projectionFields = Projections.fields(Projections.include("name","phone number"),Projections.excludeId(),Projections.exclude("salary","email","id","birthday","job"));
+        MongoCursor<Document> cursor = Workers.find().projection(projectionFields).sort(Sorts.descending("name")).iterator();
+        ArrayList<String> resultSet = new ArrayList<String>();
+        while(cursor.hasNext()){
+            String s =  "";
+            Document curr = cursor.next();
+            s  += curr.getString("name");
+            s += "- ";
+            s += curr.getString("phone number");
+            resultSet.add(s);
+        }
+        return  resultSet;
+    }
+
+    public String getHoursForEmp(String workerName){
+        MongoCollection<Document> Hours = _Instance.databaseConnection.getCollection("Hours");
+        Document target = Hours.find(Filters.eq("name",workerName)).filter(Filters.eq("Month",getMonth())).first();
+        String hours = target.getString("total hours");
+        return  hours;
+    }
+
 }
 

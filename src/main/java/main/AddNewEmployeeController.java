@@ -1,5 +1,6 @@
 package main;
 
+import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -45,6 +46,11 @@ public class AddNewEmployeeController {
         boolean valWorker = temp.checkValid(temp);
         boolean existsAlready = manager.doesEmployeeExist(temp.getId());
         if(Email.checkValidEmail(emailTF) && valWorker && !existsAlready){
+            try{
+                manager.insertEmployee(temp);
+            }catch (MongoException err){
+                System.err.println("Program ran into error: " + err);
+            }
             Email email = new Email(emailTF.getText());
             email.sendCodeByEmail(temp);
             JOptionPane.showMessageDialog(null, "Password sent to: "+emailTF.getText());
