@@ -3,6 +3,7 @@ package main;
 import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -13,11 +14,13 @@ import model.Worker;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
+import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddNewEmployeeController {
+public class AddNewEmployeeController implements Initializable {
     @FXML
     private TextField nameTF = new TextField();
     @FXML
@@ -31,16 +34,22 @@ public class AddNewEmployeeController {
     @FXML
     private CheckBox managerCB = new CheckBox();
 
+
     @FXML
     void sendCodeBTN(ActionEvent event) {
-       if(!managerCB.isSelected()){
-           Worker temp = new Worker(nameTF.getText(),idTF.getText(),phoneTf.getText(),birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),emailTF.getText());
-           workerProcess(event,temp);
-       }
-       else {
-           Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
-           workerProcess(event, temp);
-       }
+        if (DataBaseManager.getDBInstance().noUsers()){
+            Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
+            workerProcess(event, temp);
+        }
+        else {
+            if (!managerCB.isSelected()) {
+                Worker temp = new Worker(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
+                workerProcess(event, temp);
+            } else {
+                Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
+                workerProcess(event, temp);
+            }
+        }
     }
 
     private void workerProcess(ActionEvent event,Worker temp){
@@ -71,9 +80,12 @@ public class AddNewEmployeeController {
         }
     }
 
-    private void sendMail(){
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (DataBaseManager.getDBInstance().noUsers()){
+            this.managerCB.setSelected(true);
+            this.managerCB.setDisable(true);
+        }
     }
-
-
 }

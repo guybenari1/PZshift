@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DataBaseManager;
 
+import javax.swing.*;
+
 public class FirstSceneController {
     @FXML
     private TextField emailTF = new TextField();
     @FXML
     private TextField passwordTF = new TextField();
-
-
 
     public void forgotPassBTN(ActionEvent actionEvent){
         try {
@@ -36,7 +36,7 @@ public class FirstSceneController {
             DataBaseManager manager = DataBaseManager.getDBInstance();
             boolean valid = manager.validLogin(emailTF.getText(),passwordTF.getText());
             if(!valid){
-                //show incorrect entry
+                JOptionPane.showMessageDialog(null, "incorrect values");
             }else{
                 manager.changeUser(manager.getEmployeeName(emailTF.getText()));
                 valid = manager.isManager(emailTF.getText());
@@ -51,7 +51,6 @@ public class FirstSceneController {
         }
 
     }
-
 
     public void managerLogin(ActionEvent actionEvent){
         try {
