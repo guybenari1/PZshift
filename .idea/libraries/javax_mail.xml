@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="zmanim-2.3.0">
+  <library name="javax.mail">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/zmanim-2.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../JDKs and other stuff/javax.mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

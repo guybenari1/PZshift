@@ -1,10 +1,14 @@
 package model;
 
+import javafx.scene.control.TextField;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Email {
     private static String SENDER = "PZshiftmail@gmail.com";
@@ -24,11 +28,12 @@ public class Email {
         });
     }
 
-    public void sendCodeByEmail() {
+    public void sendCodeByEmail(Worker worker) {
         int randomPassword = generateRandomPassword();
-        Message message = codeByEmail(SESSION, receiver, randomPassword);
+        Message message = codeByEmail(SESSION, worker.getEmail(), randomPassword);
         try {
             Transport.send(message);
+            worker.setPassword(randomPassword);
             System.out.println("code message sent");
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -87,5 +92,12 @@ public class Email {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean checkValidEmail(TextField email){
+        //check if email is in the users DB in another method
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(email.getText());
+        return mat.matches();
     }
 }

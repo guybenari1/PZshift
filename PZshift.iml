@@ -11,15 +11,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="zmanim-2.3.0" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:bson:4.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-sync:4.0.5" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.mongodb:bson:4.0.5" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.mongodb:mongodb-driver-core:4.0.5" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/javamail-1.4.5/mail.jar!/" />
+          <root url="jar://C:/Users/שנה ב/סמסטר א/מונחה עצמים/javamail-1.4.5/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,21 +26,24 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/jaf-1.1.1/activation.jar!/" />
+          <root url="jar://C:/Users/שנה ב/סמסטר א/מונחה עצמים/jaf-1.1.1/activation.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../שנה ב/סמסטר א/מונחה עצמים/controlsfx-8.40.11.jar!/" />
+          <root url="jar://C:/Users/שנה ב/סמסטר א/מונחה עצמים/controlsfx-8.40.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="controlsfx-8.40.11" level="project" />
+    <orderEntry type="library" exported="" name="javax.mail" level="project" />
+    <orderEntry type="library" exported="" name="zmanim-1.4.0alpha" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="controlsfx-8.40.12" level="project" />
   </component>
 </module>

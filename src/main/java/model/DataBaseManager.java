@@ -1,46 +1,203 @@
 package model;
 
+import Shift_Commander.Shift;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.Updates;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseManager {
+    private static DataBaseManager _Instance = null;
+    private final MongoDatabase databaseConnection;
+    private static String _User;
 
-    public void DB() {
+    private DataBaseManager(){
         MongoClient client = MongoClients.create("mongodb+srv://GuyBenAri:1qaz2WSX3edc@pzshift.sxxqo.mongodb.net/PZshift?retryWrites=true&w=majority");
-        MongoDatabase database = client.getDatabase("PZshiftDB");
-        MongoCollection weeksReqCol = database.getCollection("WeeksRequest");
-        Document blankWeeksReqDoc = new Document().append("week", 2);
-//        weeksReqCol.insertOne(blankWeeksReqDoc);
+        databaseConnection = client.getDatabase("PZshiftDB");
+    }
 
-        MongoCollection hoursCol = database.getCollection("Hours");
-        MongoCollection messagesCol = database.getCollection("Messages");
-        MongoCollection usersCol = database.getCollection("Users");
-        MongoCollection workSchCol = database.getCollection("WorkSchedule");
-        MongoCollection workersCol = database.getCollection("Workers");
-        Document blankHoursDoc = new Document("_id", 1).append("name", "none").append("total hours", 0);
-        Document blankMessagesDoc = new Document().append("recipient", "enter workers list").append("date", "00/00/0000").append("content", "none");
-        Document blankUsersDoc = new Document("_id", 1).append("name", "none").append("password", "0000");
-        Document blankWorkSchDoc = new Document().append("week", 0);
-        Document blankWorkersDoc = new Document("_id", 1).append("name", "none").append("salary", 0).append("email", "aa@aa.com").append("phone number", 0000000).append("id", 000).append("birthday", "00/00/0000").append("job", "job title");
-        Document dayInWeek = new Document("_id", 1).append("name", "Sunday");
+    public static DataBaseManager getDBInstance() {
+        if(_Instance == null){
+            _Instance = new DataBaseManager();
+        }
+        return _Instance;
+    }
 
-//        hoursCol.insertOne(blankHoursDoc);
-//        messagesCol.insertOne(blankMessagesDoc);
-//        usersCol.insertOne(blankUsersDoc);
-//        workSchCol.insertOne(blankWorkSchDoc);
-//        workersCol.insertOne(blankWorkersDoc);
-//        weeksReqCol.insertOne(blankWeeksReqDoc);
+    public void insertEmployee(Worker temp){
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        Document workerDoc = new Document("_id",temp.getId()).append("name",temp.getName()).append("salary",temp.getSalary()).append("email",temp.getEmail()).append("phone number",temp.getPhoneNumber()).append("id",temp.getId()).append("birthday",temp.getBirthDate()).append("job",temp.job);
+        MongoCollection<Document> Users = _Instance.databaseConnection.getCollection("Users");
+        Document userDoc = new Document("_id", temp.getId()).append("name",temp.getName()).append("password",temp.getPassword());
+        Workers.insertOne(workerDoc);
+        Users.insertOne(userDoc);
+    }
 
-        try (
-                MongoCursor<Document> cur = weeksReqCol.find().iterator()) {
-            while (cur.hasNext()) {
-                Document doc = cur.next();
-                ArrayList<String> days = (ArrayList<String>) doc.get("week");
-                for (int i = 0; i < days.size() - 1; i++)
-                    System.out.println(days.get(i));
-            }
+    public boolean doesEmployeeExist(String id){
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        Document target = Workers.find(Filters.eq("id",id)).first();
+        return target != null;
+    }
+
+    private String getMonth(){
+        String res = LocalDate.now().getMonth().toString();
+        return res.toLowerCase();
+    }
+
+    public void insertHours(int workerID,String workerName, int newHours ){
+        MongoCollection<Document> hours = _Instance.databaseConnection.getCollection("Hours");
+        Document target = hours.find(Filters.eq("_id",workerID)).filter(Filters.eq("Month",getMonth())).first();
+        if(target == null){
+            Document HoursDoc = new Document("_id",workerID).append("name",workerName).append("total hours: ", newHours).append("Month",getMonth());
+            hours.insertOne(HoursDoc);
+        } else {
+            Bson projectionFields = Projections.fields(Projections.include("total hours"),Projections.exclude("_id","name"));
+            int f = Integer.getInteger(hours.find(Filters.eq("_id",workerID)).filter(Filters.eq("Month",getMonth())).projection(projectionFields).toString());
+            Bson updates = Updates.combine(
+                    Updates.set("total hours", f+newHours)
+            );
+            hours.updateOne(target,updates);
         }
     }
+
+    private boolean needNewDoc(){
+        MongoCollection<Document> weeksRequest =_Instance.databaseConnection.getCollection("WeeksRequest");
+        Bson projectionFields =Projections.fields(Projections.include("Final change date"),Projections.excludeId(),Projections.exclude("week"));
+        Document target = weeksRequest.find().projection(projectionFields).sort(Sorts.descending("Final change date")).first();
+        if(target != null){
+            LocalDate f = LocalDate.parse(target.toString());
+            return LocalDate.now().isAfter(f);
+        }
+       return true;
+    }
+
+    private void insertWeekRequestChart(){
+        MongoCollection<Document> weeksRequest =_Instance.databaseConnection.getCollection("WeeksRequest");
+        Document document = new Document();
+        List<Document> week = new ArrayList<>();
+        Document Sunday = new Document();
+        List<String> SundayMorning  = new ArrayList<>();
+        List<String> SundayEvening = new ArrayList<>();
+        Sunday.put("Morning",SundayMorning);
+        Sunday.put("Evening",SundayEvening);
+        week.add(Sunday);
+        Document Monday = new Document();
+        List<String> MondayMorning  = new ArrayList<>();
+        List<String> MondayEvening = new ArrayList<>();
+        Monday.put("Morning",MondayMorning);
+        Monday.put("Evening",MondayEvening);
+        week.add(Monday);
+        Document Tuesday = new Document();
+        List<String> TuesdayMorning  = new ArrayList<>();
+        List<String> TuesdayEvening = new ArrayList<>();
+        Tuesday.put("Morning",TuesdayMorning);
+        Tuesday.put("Evening",TuesdayEvening);
+        week.add(Tuesday);
+        Document Wednesday = new Document();
+        List<String> WednesdayMorning  = new ArrayList<>();
+        List<String> WednesdayEvening = new ArrayList<>();
+        Wednesday.put("Morning",WednesdayMorning);
+        Wednesday.put("Evening",WednesdayEvening);
+        week.add(Wednesday);
+        Document thursday = new Document();
+        List<String> thursdayMorning  = new ArrayList<>();
+        List<String> thursdayEvening = new ArrayList<>();
+        thursday.put("Morning",thursdayMorning);
+        thursday.put("Evening",thursdayEvening);
+        week.add(thursday);
+        Document friday = new Document();
+        List<String> fridayMorning  = new ArrayList<>();
+        List<String> fridayEvening = new ArrayList<>();
+        friday.put("Morning",fridayMorning);
+        friday.put("Evening",fridayEvening);
+        week.add(friday);
+        Document saturday = new Document();
+        List<String> saturdayMorning  = new ArrayList<>();
+        List<String> saturdayEvening = new ArrayList<>();
+        saturday.put("Morning",saturdayMorning);
+        saturday.put("Evening",saturdayEvening);
+        week.add(saturday);
+        document.put("Week", week);
+        LocalDate f = LocalDate.now().plusWeeks(1);
+        document.put("Final change date", f);
+        weeksRequest.insertOne(document);
+    }
+
+    private void addShiftHelper(int day, String time, String workerName,int addOrRemove){
+        MongoCollection<Document> weeksRequest = _Instance.databaseConnection.getCollection("WeeksRequest");
+        Document target= weeksRequest.find().sort(Sorts.descending("Final change date")).first();
+        Document target2 =  target.getList("Week",Document.class).get(day);
+        if(addOrRemove > 0){
+            Bson updates = Updates.combine( Updates.addToSet(time,workerName));
+            weeksRequest.updateOne(target2,updates);
+        } else {
+            Bson updates2 = Updates.combine((Updates.pull(time,workerName)));
+            weeksRequest.updateOne(target2,updates2);
+        }
+
+    }
+
+    public void changeShift(Shift.Shifttype type,String workerName, int addOrRemove){
+        if(needNewDoc()){
+            insertWeekRequestChart();
+        }
+        switch (type){
+            case SUNMORN -> addShiftHelper(0,"Morning",workerName,addOrRemove);
+            case SUNEVE -> addShiftHelper(0,"Evening",workerName,addOrRemove);
+            case MONMORN -> addShiftHelper(1,"Morning",workerName,addOrRemove);
+            case MONEVE -> addShiftHelper(1,"Evening",workerName,addOrRemove);
+            case TUMORN -> addShiftHelper(2,"Morning",workerName,addOrRemove);
+            case TUEVE -> addShiftHelper(2,"Evening",workerName,addOrRemove);
+            case WEMORN -> addShiftHelper(3,"Morning",workerName,addOrRemove);
+            case WEEVE -> addShiftHelper(3,"Evening",workerName,addOrRemove);
+            case THMORN -> addShiftHelper(4,"Morning",workerName,addOrRemove);
+            case THEVE -> addShiftHelper(4,"Evening",workerName,addOrRemove);
+            case FRIMORN ->addShiftHelper(5,"Morning",workerName,addOrRemove);
+            case FRIEVE -> addShiftHelper(5,"Evening",workerName,addOrRemove);
+            case SATMORN -> addShiftHelper(6,"Morning",workerName,addOrRemove);
+            case SATEVE -> addShiftHelper(6,"Evening",workerName,addOrRemove);
+        }
+    }
+
+    public boolean validLogin(String email, String password){
+        MongoCollection<Document> Users = _Instance.databaseConnection.getCollection("Users");
+        Document target = Users.find(Filters.eq("Email",email)).filter(Filters.eq("password",password)).first();
+        if(target!= null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isManager(String email){
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        Document target = Workers.find(Filters.eq("email",email)).first();
+        String job = target.getString("job");
+        if(job == "Manager"){
+            return true;
+        }
+        return false;
+    }
+
+    public String getEmployeeName(String email) {
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        Document target = Workers.find(Filters.eq("email", email)).first();
+        if (target != null) {
+            return target.getString("name");
+        }
+        return null;
+    }
+
+    public void changeUser(String name){
+        _User =name;
+    }
+
+    public String getUser(){return _User;}
 }
+
