@@ -1,7 +1,8 @@
 package model;
 
-import net.sourceforge.zmanim.hebrewcalendar.HebrewDateFormatter;
-import net.sourceforge.zmanim.hebrewcalendar.JewishCalendar;
+import com.kosherjava.zmanim.*;
+import com.kosherjava.zmanim.util.*;
+import com.kosherjava.zmanim.hebrewcalendar.*;
 
 import java.util.Date;
 

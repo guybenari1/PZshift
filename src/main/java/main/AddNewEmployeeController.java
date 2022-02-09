@@ -37,8 +37,10 @@ public class AddNewEmployeeController {
            Worker temp = new Worker(nameTF.getText(),idTF.getText(),phoneTf.getText(),birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),emailTF.getText());
            workerProcess(event,temp);
        }
-       Manager temp = new Manager(nameTF.getText(),idTF.getText(),phoneTf.getText(),birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),emailTF.getText());
-       workerProcess(event,temp);
+       else {
+           Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
+           workerProcess(event, temp);
+       }
     }
 
     private void workerProcess(ActionEvent event,Worker temp){
@@ -72,8 +74,6 @@ public class AddNewEmployeeController {
     private void sendMail(){
 
     }
-
-
 
 
 }

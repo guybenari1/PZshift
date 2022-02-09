@@ -9,7 +9,6 @@ public class Shift {
     private String workerName;
 
 
-
     public Shift(int index, String name){
         this.myType =eArr[index];
         this.workerName =name;

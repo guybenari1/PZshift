@@ -25,7 +25,7 @@ public class ForgotPasswordController {
             DataBaseManager manager =DataBaseManager.getDBInstance();
             String s = manager.getEmployeeName(emailTF.getText());
             if(s==null){
-                //doesn't exist in system
+                JOptionPane.showMessageDialog(null, "employee doesnt exsist");
             }
             Email email = new Email(emailTF.getText());
             Worker temp=new Worker(emailTF.getText());

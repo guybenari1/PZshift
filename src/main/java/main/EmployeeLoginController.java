@@ -74,6 +74,7 @@ public class EmployeeLoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.nameT.setText("Hello, "+ "guy");
+        String[] firstName = DataBaseManager.getDBInstance().getUser().split(" ", 2);
+        this.nameT.setText("Hello, "+ firstName[0]);
     }
 }
