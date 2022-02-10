@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DataBaseManager;
+import model.Manager;
 
 import javax.swing.*;
 import java.net.URL;
@@ -78,12 +79,8 @@ public class ManagerLoginController implements Initializable {
     }
 
     public void employeesDetailsBTN (){
-        ArrayList<String> employee = DataBaseManager.getDBInstance().getPhoneBook();//change to all details
-        String allEmployees = "";
-        for (int i=0; i< employee.size(); i++){
-            allEmployees += employee.get(i) +"\n";
-        }
-        JOptionPane.showMessageDialog(null, allEmployees);
+        String res = Manager.getEmployeeDeets();
+        JOptionPane.showMessageDialog(null, res);
     }
 
     @Override

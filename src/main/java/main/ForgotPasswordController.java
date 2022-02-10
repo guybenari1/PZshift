@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.DataBaseManager;
 import model.Email;
+import model.LoginMaster;
 import model.Worker;
 import org.bson.Document;
 
@@ -21,20 +22,8 @@ public class ForgotPasswordController {
 
     @FXML
     void sendCodeBTN(ActionEvent event) {
-        try{
-            DataBaseManager manager =DataBaseManager.getDBInstance();
-            String s = manager.getEmployeeName(emailTF.getText());
-            if(s==null){
-                JOptionPane.showMessageDialog(null, "employee doesnt exsist");
-            }
-            Email email = new Email(emailTF.getText());
-            Worker temp=new Worker(emailTF.getText());
-            email.sendCodeByEmail(temp);
-            manager.updatePassword(s,temp.getPassword());
-            JOptionPane.showMessageDialog(null,"New password sent to you");
-        }catch (MongoException err){
-            System.err.println("System ran into an error: " +err);
-        }
+        String res = LoginMaster.getInstance().forgotPassword(emailTF.getText());
+        JOptionPane.showMessageDialog(null,res);
     }
 
 }

@@ -2,6 +2,7 @@ package model;
 
 import Shift_Commander.Shift;
 import com.mongodb.BasicDBObject;
+import com.mongodb.MongoException;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
@@ -91,7 +92,7 @@ public class DataBaseManager {
        return true;
     }
 
-    public void addWorkersToShift(int dayOfWeek, int shiftTime, List<String> workers){
+    public void addWorkersToShift(int dayOfWeek, int shiftTime, List<String> workers) throws MongoException {
         String[] shift = {"Morning","Evening"};
         Iterator<String> workerIt= workers.iterator();
         MongoCollection<Document> WorkSchedule= _Instance.databaseConnection.getCollection("WorkSchedule");

@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.DataBaseManager;
+import model.Manager;
 
 import javax.swing.*;
 import java.net.URL;
@@ -385,21 +386,20 @@ public class ShiftsAssignmentController implements Initializable {
 
     public void publishBTN(){
         try{
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            manager.addWorkersToShift(0,0,this.sunMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(0,1,this.sunELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(1,0,this.monMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(1,1,this.monELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(2,0,this.tueMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(2,1,this.tueELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(3,0,this.wedMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(3,1,this.wedELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(4,0,this.thuMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(4,1,this.thuELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(5,0,this.friMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(5,1,this.friELVSub.getItems().stream().toList());
-            manager.addWorkersToShift(6,0,this.satMLVSub.getItems().stream().toList());
-            manager.addWorkersToShift(6,1,this.satELVSub.getItems().stream().toList());
+            Manager.shiftAdderMaster(0,0,this.sunMLVSub);
+            Manager.shiftAdderMaster(0,0,this.sunELVSub);
+            Manager.shiftAdderMaster(1,0,this.monMLVSub);
+            Manager.shiftAdderMaster(1,1,this.monELVSub);
+            Manager.shiftAdderMaster(2,0,this.tueMLVSub);
+            Manager.shiftAdderMaster(2,1,this.tueELVSub);
+            Manager.shiftAdderMaster(3,0,this.wedMLVSub);
+            Manager.shiftAdderMaster(3,1,this.wedELVSub);
+            Manager.shiftAdderMaster(4,0,this.thuMLVSub);
+            Manager.shiftAdderMaster(4,1,this.thuELVSub);
+            Manager.shiftAdderMaster(5,0,this.friMLVSub);
+            Manager.shiftAdderMaster(5,1,this.friELVSub);
+            Manager.shiftAdderMaster(6,0,this.satMLVSub);
+            Manager.shiftAdderMaster(6,1,this.satELVSub);
         } catch (MongoException err){
             System.err.println("System ran into an error "+ err);
         }

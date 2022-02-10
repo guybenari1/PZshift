@@ -70,9 +70,9 @@ public class Email {
         return null;
     }
 
-    public static boolean checkValidEmail(TextField email){
+    public static boolean checkValidEmail(String email){
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-        Matcher mat = pattern.matcher(email.getText());
+        Matcher mat = pattern.matcher(email);
         return mat.matches();
     }
 }

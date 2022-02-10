@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DataBaseManager;
+import model.Worker;
 
 import javax.mail.Message;
 import javax.swing.*;
@@ -41,24 +42,13 @@ public class EmployeeLoginController implements Initializable {
     }
 
     public void phonebookBTN (){
-        try {
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            ArrayList<String> phoneBook = manager.getPhoneBook();
-            String contacts = "";
-            for (String s : phoneBook) {
-                contacts += s+"\n";
-            }
-            JOptionPane.showMessageDialog(null, contacts);
-        } catch (MongoException  err){
-            System.err.println("Progarm ran into the error: " + err);
-        }
-
+        String s = Worker.getPhoneBook();
+        JOptionPane.showMessageDialog(null, s);
     }
 
     public void showHoursBTN (){
         try {
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            String result = manager.getHoursForEmp(manager.getUser());
+            String result =  Worker.getHours();
             JOptionPane.showMessageDialog(null, result);
 
         }catch (MongoException err){
@@ -68,21 +58,8 @@ public class EmployeeLoginController implements Initializable {
     }
 
     public void nextWeekBTN () {
-        if (!DataBaseManager.getDBInstance().nextWeekExists()) {
-            JOptionPane.showMessageDialog(null, "there are no weeks for next week yet");
-        } else {
-            try {
-                DataBaseManager manager = DataBaseManager.getDBInstance();
-                ArrayList<String> toDisplay = manager.getNextWeek(manager.getUser());
-                String shifts = "";
-                for (String s : toDisplay) {
-                    shifts += s + "\n";
-                }
-                JOptionPane.showMessageDialog(null, shifts);
-            } catch (MongoException err) {
-                System.err.println("System ran into an error " + err);
-            }
-        }
+        String res = Worker.getNextWeek();
+        JOptionPane.showMessageDialog(null, res);
     }
 
     @Override

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DataBaseManager;
+import model.LoginMaster;
 
 import javax.swing.*;
 
@@ -32,25 +33,14 @@ public class FirstSceneController {
         }
     }
     public void loginBTN(ActionEvent actionEvent){
-        try{
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            boolean valid = manager.validLogin(emailTF.getText(),passwordTF.getText());
-            if(!valid){
-                JOptionPane.showMessageDialog(null, "incorrect values");
-            }else{
-                manager.changeUser(manager.getEmployeeName(emailTF.getText()));
-                manager.get_CurrentWeek();
-                valid = manager.isManager(emailTF.getText());
-                if(!valid){
-                    employeeLogin(actionEvent);
-                }else{
-                    managerLogin(actionEvent);
-                }
-            }
-        }catch (MongoException err){
-            System.err.println("Progarm ran into the error: " + err);
+        String s = LoginMaster.getInstance().loginB(emailTF.getText(),passwordTF.getText());
+        if(s.equals("employee")){
+            employeeLogin(actionEvent);
+        } else if(s.equals("manager")){
+            managerLogin(actionEvent);
+        } else {
+            JOptionPane.showMessageDialog(null, s);
         }
-
     }
 
     public void managerLogin(ActionEvent actionEvent){

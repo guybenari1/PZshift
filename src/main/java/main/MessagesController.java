@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import model.DataBaseManager;
+import model.Manager;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,8 +51,7 @@ public class MessagesController implements Initializable {
             for(int i=0; i<length;i++){
                 recipientList.add(receiversLV.getItems().get(i).toString());
             }
-            DataBaseManager manager = DataBaseManager.getDBInstance();
-            manager.sendMessage(recipientList,messageTA.getText());
+            Manager.sendMess(recipientList,messageTA.getText());
         }catch (MongoException err){
             System.err.println("The system ran into an error :"+err);
         }

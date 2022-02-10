@@ -37,49 +37,17 @@ public class AddNewEmployeeController implements Initializable {
 
     @FXML
     void sendCodeBTN(ActionEvent event) {
-        if (DataBaseManager.getDBInstance().noUsers()){
+        String s;
+        if (DataBaseManager.getDBInstance().noUsers() || managerCB.isSelected()){
             Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
-            workerProcess(event, temp);
+            s = Worker.workerProcess(temp);
         }
         else {
-            if (!managerCB.isSelected()) {
-                Worker temp = new Worker(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
-                workerProcess(event, temp);
-            } else {
-                Manager temp = new Manager(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
-                workerProcess(event, temp);
-            }
+            Worker temp = new Worker(nameTF.getText(), idTF.getText(), phoneTf.getText(), birthdateDP.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), emailTF.getText());
+            s = Worker.workerProcess(temp);
         }
+        JOptionPane.showMessageDialog(null, s);
     }
-
-    private void workerProcess(ActionEvent event,Worker temp){
-        DataBaseManager manager = DataBaseManager.getDBInstance();
-        boolean valWorker = temp.checkValid(temp);
-        boolean existsAlready = manager.doesEmployeeExist(temp.getId());
-        if(Email.checkValidEmail(emailTF) && valWorker && !existsAlready){
-            try{
-                Email email = new Email(emailTF.getText());
-                email.sendCodeByEmail(temp);
-                manager.insertEmployee(temp);
-            }catch (MongoException err){
-                System.err.println("Program ran into error: " + err);
-            }
-            JOptionPane.showMessageDialog(null, "Password sent to: "+emailTF.getText());
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Sorry, We ran into a problem: ");
-            if(!valWorker){
-                JOptionPane.showMessageDialog(null, "Some data of the worker is invalid");
-            }
-            if(!Email.checkValidEmail(emailTF)){
-                JOptionPane.showMessageDialog(null, "The email is not valid");
-            }
-            if(existsAlready){
-                JOptionPane.showMessageDialog(null, "This worker is already employeed!");
-            }
-        }
-    }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
