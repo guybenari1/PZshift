@@ -16,7 +16,6 @@
       <Text layoutX="25.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="116.13671875" />
       <Text layoutX="25.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="116.13671875" />
       <Button fx:id="forgotPassBtn" layoutX="179.0" layoutY="233.0" mnemonicParsing="false" onAction="#forgotPassBTN" text="Forgot password" />
-      <Button fx:id="managerLogin" layoutX="222.0" layoutY="26.0" mnemonicParsing="false" onAction="#managerLogin" text="manager" />
       <TextField fx:id="emailTF" layoutX="25.0" layoutY="100.0" prefHeight="25.0" prefWidth="260.0" promptText="enter email" />
       <TextField fx:id="passwordTF" layoutX="25.0" layoutY="170.0" prefHeight="25.0" prefWidth="260.0" promptText="enter password" />
    </children>

@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DataBaseManager;
 
+import javax.mail.Message;
 import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -88,5 +89,18 @@ public class EmployeeLoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String[] firstName = DataBaseManager.getDBInstance().getUser().split(" ", 2);
         this.nameT.setText("Hello, "+ firstName[0]);
+        ArrayList<String> messages = DataBaseManager.getDBInstance().getMessages();
+        String allMessages = "";
+        for (int i=0; i< messages.size(); i++){
+            allMessages += messages.get(i);
+        }
+        this.managerMessagesTA.setText(allMessages);
+        ArrayList<String> shifts = DataBaseManager.getDBInstance().getNextWeek(this.nameT.getText());
+        String allShifts = "";
+        for (int i=0; i< shifts.size(); i++){
+            allShifts += shifts.get(i);
+        }
+        this.weekShiftsTA.setText(allShifts);
+
     }
 }

@@ -107,9 +107,4 @@ public class Worker {
         this.email = email;
         this.workerEmail = new Email(this.email);
     }
-
-
-    public void sendTextEmail(String text){
-        workerEmail.sendTextByEmail(text);
-    }
 }

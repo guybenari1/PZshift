@@ -40,16 +40,6 @@ public class Email {
         }
     }
 
-    public void sendTextByEmail(String text) {
-        Message message = textByEmail(SESSION, receiver, text);
-        try {
-            Transport.send(message);
-            System.out.println("text message sent");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void setProperties (Properties properties){
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
@@ -80,22 +70,7 @@ public class Email {
         return null;
     }
 
-    private Message textByEmail(Session session, String receiver, String text) {
-        Message message = new MimeMessage(session);
-        try {
-            message.setFrom(new InternetAddress(SENDER));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-            message.setSubject("email from PZshift boss");
-            message.setText(text);
-            return message;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public static boolean checkValidEmail(TextField email){
-        //check if email is in the users DB in another method
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email.getText());
         return mat.matches();

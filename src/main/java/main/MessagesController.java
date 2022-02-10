@@ -28,10 +28,8 @@ public class MessagesController implements Initializable {
         if (click.getClickCount() == 2) {
             String currentItemSelected;
             currentItemSelected = (String) employeesLV.getSelectionModel().getSelectedItem();
-            if (checkIfChosen(currentItemSelected)) {
-                this.receiversLV.getItems().add(currentItemSelected);
-                this.employeesLV.getItems().remove(currentItemSelected);
-            }
+            this.receiversLV.getItems().add(currentItemSelected);
+            this.employeesLV.getItems().remove(currentItemSelected);
         }
     }
 
@@ -42,16 +40,6 @@ public class MessagesController implements Initializable {
             this.receiversLV.getItems().remove(currentItemSelected);
             this.employeesLV.getItems().add(currentItemSelected);
         }
-    }
-
-    public boolean checkIfChosen(String name){
-        int length = receiversLV.getItems().size();
-        for (int i=0; i<length; i++){
-            if (receiversLV.getItems().get(i).equals(name)){
-                return false;
-            }
-        }
-        return true;
     }
 
     @FXML

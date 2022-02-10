@@ -25,7 +25,6 @@ public class SalaryController implements Initializable {
         }
         catch (MongoException err){
             System.err.println("System ran into an error: " +err);
-
         }
     }
 

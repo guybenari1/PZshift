@@ -12,6 +12,7 @@ import model.DataBaseManager;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManagerLoginController implements Initializable {
@@ -76,12 +77,13 @@ public class ManagerLoginController implements Initializable {
         }
     }
 
-    public void showFinancialBTN (){
-        JOptionPane.showMessageDialog(null, "show financial reports");
-    }
-
     public void employeesDetailsBTN (){
-        JOptionPane.showMessageDialog(null, "show employees details");
+        ArrayList<String> employee = DataBaseManager.getDBInstance().getPhoneBook();//change to all details
+        String allEmployees = "";
+        for (int i=0; i< employee.size(); i++){
+            allEmployees += employee.get(i) +"\n";
+        }
+        JOptionPane.showMessageDialog(null, allEmployees);
     }
 
     @Override

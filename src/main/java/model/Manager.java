@@ -8,15 +8,8 @@ public class Manager extends Worker{
         this.job = "Manager";
     }
 
-    protected void addEmployee(){
-
-
-
-    }
-
     public Manager(String email) {
         super(email);
     }
 
-    //send mail to manager with special code
 }
