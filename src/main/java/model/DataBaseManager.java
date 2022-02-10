@@ -409,5 +409,29 @@ public class DataBaseManager {
         messages.insertOne(newMessage);
     }
 
+    public ArrayList<String> getWorkerDeatils(){
+        MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
+        MongoCursor<Document> workerSet = Workers.find(Filters.eq("job","Worker")).iterator();
+        ArrayList<String> resultSet = new ArrayList<String>();
+        while(workerSet.hasNext()){
+            String s = "";
+            Document curr = workerSet.next();
+            s += "Name: ";
+            s += curr.getString("name");
+            s += ", Salary per hour: ";
+            s += curr.getString("salary");
+            s += ", email: ";
+            s += curr.getString("email");
+            s += ", phone number: ";
+            s += curr.getString("phone number");
+            s += ", id: ";
+            s += curr.getString("id");
+            s += ", birth date: ";
+            s += curr.getString("birthday");
+            resultSet.add(s);
+        }
+        return  resultSet;
+    }
+
 }
 
