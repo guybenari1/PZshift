@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.control.TextField;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;

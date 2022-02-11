@@ -23,7 +23,4 @@ public class Shift {
         DataBaseManager manager = DataBaseManager.getDBInstance();
         manager.changeShift(this.myType,this.workerName,0);
     }
-
-
-
 }

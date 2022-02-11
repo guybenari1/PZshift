@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="280.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.FirstSceneController">
+<AnchorPane prefHeight="280.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.FirstSceneController">
    <children>
       <Button fx:id="BtnLogin" layoutX="25.0" layoutY="233.0" mnemonicParsing="false" onAction="#loginBTN" prefHeight="25.0" prefWidth="63.0" text="Login" />
       <Text fx:id="title" layoutX="25.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PZshift login" wrappingWidth="168.80340576171875">

@@ -1,4 +1,4 @@
-package main;
+package mainAndControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +10,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DataBaseManager;
 import model.Manager;
-
 import javax.swing.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManagerLoginController implements Initializable {

@@ -1,7 +1,6 @@
-package main;
+package mainAndControllers;
 
 import com.mongodb.MongoException;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import model.DataBaseManager;
 import model.Manager;
-
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ResourceBundle;
 
 

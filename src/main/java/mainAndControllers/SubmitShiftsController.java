@@ -1,17 +1,20 @@
-package main;
+package mainAndControllers;
 
 import Shift_Commander.Shift;
 import Shift_Commander.ShiftHandler;
 import Shift_Commander.addShift;
 import com.mongodb.MongoException;
-import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import model.DataBaseManager;
+import model.Holidays;
 
 import javax.swing.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SubmitShiftsController {
+public class SubmitShiftsController implements Initializable {
     @FXML
     private CheckBox sunMCB = new CheckBox();
     @FXML
@@ -71,5 +74,12 @@ public class SubmitShiftsController {
             System.err.println("Program ran into error: "+err);
         }
         JOptionPane.showMessageDialog(null, "shifts submitted");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (Holidays.holidaysInWeek()!=null){
+            JOptionPane.showMessageDialog(null, "in the follow week there will be these holidays: " + Holidays.holidaysInWeek());
+        }
     }
 }

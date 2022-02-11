@@ -1,19 +1,13 @@
-package main;
+package mainAndControllers;
 
 import com.mongodb.MongoException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.DataBaseManager;
+import model.Holidays;
 import model.Manager;
 
 import javax.swing.*;
@@ -421,5 +415,8 @@ public class ShiftsAssignmentController implements Initializable {
         this.friELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(5,1));
         this.satMLV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(6,0));
         this.satELV.getItems().addAll(DataBaseManager.getDBInstance().shiftSignUp(6,1));
+        if (Holidays.holidaysInWeek()!=null){
+            JOptionPane.showMessageDialog(null, "in the follow week there will be these holidays: " + Holidays.holidaysInWeek());
+        }
     }
 }

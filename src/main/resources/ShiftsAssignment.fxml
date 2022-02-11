@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="331.0" prefWidth="836.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ShiftsAssignmentController">
+<AnchorPane prefHeight="331.0" prefWidth="836.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.ShiftsAssignmentController">
 
    <children>
       <AnchorPane fx:id="assignAP" prefHeight="337.0" prefWidth="800.0">

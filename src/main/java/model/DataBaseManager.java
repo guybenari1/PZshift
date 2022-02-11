@@ -1,7 +1,6 @@
 package model;
 
 import Shift_Commander.Shift;
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
@@ -10,8 +9,6 @@ import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
-import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -433,6 +430,5 @@ public class DataBaseManager {
         }
         return  resultSet;
     }
-
 }
 

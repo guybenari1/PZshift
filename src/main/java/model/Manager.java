@@ -2,7 +2,6 @@ package model;
 
 import com.mongodb.MongoException;
 import javafx.scene.control.ListView;
-
 import java.util.ArrayList;
 
 public class Manager extends Worker{
@@ -12,7 +11,6 @@ public class Manager extends Worker{
         this.salary = 10000; //monthly
         this.job = "Manager";
     }
-
 
     public static String getEmployeeDeets(){
         ArrayList<String> employee = DataBaseManager.getDBInstance().getWorkerDeatils();
@@ -40,5 +38,4 @@ public class Manager extends Worker{
         DataBaseManager manager = DataBaseManager.getDBInstance();
         manager.addWorkersToShift(first,second,button.getItems().stream().toList());
     }
-
 }

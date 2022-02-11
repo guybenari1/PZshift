@@ -39,7 +39,7 @@ public class LoginMaster {
         }
         return s;
     }
-    //can you see it now
+
     public String forgotPassword(String email){
         String s = "";
         try{

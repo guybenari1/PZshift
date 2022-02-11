@@ -1,4 +1,4 @@
-package main;
+package mainAndControllers;
 
 import com.mongodb.MongoException;
 import javafx.collections.FXCollections;
@@ -8,7 +8,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import model.DataBaseManager;
 import model.Manager;
-
 import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;

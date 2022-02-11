@@ -1,4 +1,4 @@
-package main;
+package mainAndControllers;
 
 import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
@@ -12,8 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DataBaseManager;
 import model.Worker;
-
-import javax.mail.Message;
 import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;

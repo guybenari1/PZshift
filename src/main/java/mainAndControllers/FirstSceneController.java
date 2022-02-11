@@ -1,6 +1,5 @@
-package main;
+package mainAndControllers;
 
-import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,9 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.DataBaseManager;
 import model.LoginMaster;
-
 import javax.swing.*;
 
 public class FirstSceneController {

@@ -2,7 +2,6 @@ package model;
 
 import com.mongodb.MongoException;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,7 +14,6 @@ public class Worker {
     protected String id;
     protected String birthDate;
     protected String password;
-    protected int hours;
     protected String job;
 
 
@@ -120,10 +118,6 @@ public class Worker {
 
     public String getEmail() {
         return email;
-    }
-
-    public Email getWorkerEmail() {
-        return workerEmail;
     }
 
     public String getPhoneNumber() {

@@ -1,21 +1,17 @@
 package model;
 
-import com.kosherjava.zmanim.*;
-import com.kosherjava.zmanim.util.*;
 import com.kosherjava.zmanim.hebrewcalendar.*;
-
+import java.time.LocalDate;
 import java.util.Date;
 
-public abstract class Holidays {
+public class Holidays {
     private Date date;
 
     public Holidays(int day, int month, int year) {
         this.date = new Date(year-1900, month-1, day);
     }
 
-    // JewishDate jewishDate = new JewishDate(date);
     public boolean isHoliday() {
-        // Date date = new Date(122,month,day); // year 122 + *1900* = 2022 , month 0-11
         JewishCalendar jewishCalendar = new JewishCalendar(date);
         jewishCalendar.setInIsrael(true);
         if (jewishCalendar.getYomTovIndex() != -1) {
@@ -28,5 +24,19 @@ public abstract class Holidays {
         HebrewDateFormatter hebrewDateFormatter = new HebrewDateFormatter();
         JewishCalendar jewishCalendar = new JewishCalendar(date);
         return hebrewDateFormatter.formatYomTov(jewishCalendar);
+    }
+
+    public static String holidaysInWeek(){
+        LocalDate date;
+        Holidays holidayDate;
+        String holidays=null;
+        for (int i=0; i<7; i++){
+            date = LocalDate.now().plusDays(i);
+            holidayDate = new Holidays(date.getDayOfMonth(),date.getMonthValue(), date.getYear());
+            if (holidayDate.isHoliday()){
+                holidays+=holidayDate.whichHoliday() +"\n";
+            }
+        }
+        return holidays;
     }
 }

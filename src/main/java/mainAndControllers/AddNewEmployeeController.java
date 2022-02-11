@@ -1,6 +1,5 @@
-package main;
+package mainAndControllers;
 
-import com.mongodb.MongoException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,17 +7,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import model.DataBaseManager;
-import model.Email;
 import model.Manager;
 import model.Worker;
-
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddNewEmployeeController implements Initializable {
     @FXML
