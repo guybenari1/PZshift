@@ -9,7 +9,10 @@ import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -39,7 +42,8 @@ public class DataBaseManager {
         if (check == null) {
             _CurrentWeek = LocalDate.now();
         } else {
-            _CurrentWeek = LocalDate.parse(check.get("week start date", Date.class).toString());
+            Date d;
+            _CurrentWeek = Instant.ofEpochMilli(check.get("week start date", Date.class).getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
         }
     }
 
