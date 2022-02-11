@@ -33,7 +33,6 @@ public class Email {
         try {
             Transport.send(message);
             worker.setPassword(randomPassword);
-            JOptionPane.showMessageDialog(null, "code message sent");
         } catch (MessagingException e) {
             e.printStackTrace();
         }

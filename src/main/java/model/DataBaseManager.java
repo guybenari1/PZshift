@@ -305,6 +305,9 @@ public class DataBaseManager {
     public String getHoursForEmp(String workerName){
         MongoCollection<Document> Hours = _Instance.databaseConnection.getCollection("Hours");
         Document target = Hours.find(Filters.eq("name",workerName)).filter(Filters.eq("Month",getMonth())).first();
+        if (target == null){
+            return null;
+        }
         String hours = target.getString("total hours");
         return  hours;
     }
@@ -316,6 +319,9 @@ public class DataBaseManager {
         ArrayList<String> fin =new ArrayList<String>();
         MongoCollection<Document> WorkSchedle =_Instance.databaseConnection.getCollection("WorkSchedule");
         Document target = WorkSchedle.find(Filters.eq("week start date", _CurrentWeek.plusWeeks(1))).first();
+        if (target == null){
+            return null;
+        }
         List<Document> week = target.getList("week",Document.class);
         for(int i=0; i<week.size();i++){
             for (int j=0; j<2;j++){

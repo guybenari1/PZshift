@@ -29,13 +29,16 @@ public class Holidays {
     public static String holidaysInWeek(){
         LocalDate date;
         Holidays holidayDate;
-        String holidays=null;
+        String holidays="";
         for (int i=0; i<7; i++){
             date = LocalDate.now().plusDays(i);
             holidayDate = new Holidays(date.getDayOfMonth(),date.getMonthValue(), date.getYear());
             if (holidayDate.isHoliday()){
-                holidays+=holidayDate.whichHoliday() +"\n";
+                holidays+=holidayDate.whichHoliday() +" on "+ date.getDayOfWeek() +"\n";
             }
+        }
+        if (holidays.isEmpty()){
+            return null;
         }
         return holidays;
     }

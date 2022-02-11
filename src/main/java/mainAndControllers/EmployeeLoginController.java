@@ -47,12 +47,15 @@ public class EmployeeLoginController implements Initializable {
     public void showHoursBTN (){
         try {
             String result =  Worker.getHours();
-            JOptionPane.showMessageDialog(null, result);
-
+            if (result == null){
+                JOptionPane.showMessageDialog(null, "no hours yet");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, result);
+            }
         }catch (MongoException err){
             System.err.println("Program ran into an error: "+ err);
         }
-        JOptionPane.showMessageDialog(null, "print hours");
     }
 
     public void nextWeekBTN () {
@@ -71,11 +74,12 @@ public class EmployeeLoginController implements Initializable {
         }
         this.managerMessagesTA.setText(allMessages);
         ArrayList<String> shifts = DataBaseManager.getDBInstance().getNextWeek(this.nameT.getText());
-        String allShifts = "";
-        for (int i=0; i< shifts.size(); i++){
-            allShifts += shifts.get(i);
+        if (shifts != null){
+            String allShifts = "";
+            for (int i=0; i< shifts.size(); i++){
+                allShifts += shifts.get(i);
+            }
+            this.weekShiftsTA.setText(allShifts);
         }
-        this.weekShiftsTA.setText(allShifts);
-
     }
 }
