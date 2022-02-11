@@ -261,7 +261,6 @@ public class DataBaseManager {
         MongoCollection<Document> Workers = _Instance.databaseConnection.getCollection("Workers");
         Document target = Workers.find(Filters.eq("email",email)).first();
         String job = target.getString("job");
-        System.out.println(job);
         if(job.equals("Manager")){
             return true;
         }

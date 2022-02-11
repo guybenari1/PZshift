@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="211.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.SubmitShiftsController">
+<AnchorPane prefHeight="211.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.SubmitShiftsController">
     <children>
       <Text layoutX="-1.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit shifts" textAlignment="CENTER" wrappingWidth="542.0">
          <font>

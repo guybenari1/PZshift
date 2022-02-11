@@ -3,6 +3,7 @@ package model;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.*;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -32,7 +33,7 @@ public class Email {
         try {
             Transport.send(message);
             worker.setPassword(randomPassword);
-            System.out.println("code message sent");
+            JOptionPane.showMessageDialog(null, "code message sent");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
