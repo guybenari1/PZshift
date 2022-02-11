@@ -11,6 +11,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class DataBaseManager {
         if (check == null) {
             _CurrentWeek = LocalDate.now();
         } else {
-            _CurrentWeek = check.get("week start date", LocalDate.class);
+            _CurrentWeek = LocalDate.parse(check.get("week start date", Date.class).toString());
         }
     }
 
