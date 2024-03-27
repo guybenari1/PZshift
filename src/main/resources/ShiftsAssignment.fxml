@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="331.0" prefWidth="836.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.ShiftsAssignmentController">
+
+   <children>
+      <AnchorPane fx:id="assignAP" prefHeight="337.0" prefWidth="800.0">
+         <children>
+            <Text layoutX="18.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Morning" wrappingWidth="52.0" />
+            <Text layoutX="18.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evening" wrappingWidth="52.0" />
+            <VBox layoutX="72.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sunday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="sunMLV" onMouseClicked="#doubleClickAdd1M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="sunELV" onMouseClicked="#doubleClickAdd1E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="172.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="monMLV" onMouseClicked="#doubleClickAdd2M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="monELV" onMouseClicked="#doubleClickAdd2E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="272.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tuesday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="tueMLV" onMouseClicked="#doubleClickAdd3M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="tueELV" onMouseClicked="#doubleClickAdd3E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="372.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wednesday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="wedMLV" onMouseClicked="#doubleClickAdd4M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="wedELV" onMouseClicked="#doubleClickAdd4E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="472.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thursday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="thuMLV" onMouseClicked="#doubleClickAdd5M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="thuELV" onMouseClicked="#doubleClickAdd5E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="572.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Friday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="friMLV" onMouseClicked="#doubleClickAdd6M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="friELV" onMouseClicked="#doubleClickAdd6E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="672.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saturday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="satMLV" onMouseClicked="#doubleClickAdd7M" prefHeight="100.0" prefWidth="100.0" />
+                  <ListView fx:id="satELV" onMouseClicked="#doubleClickAdd7E" prefHeight="100.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <Text layoutX="273.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign next week shifts">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Button layoutX="363.0" layoutY="269.0" mnemonicParsing="false" onAction="#showBTN" prefHeight="34.0" prefWidth="118.0" text="show">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="showAP" prefHeight="313.0" prefWidth="836.0" visible="false">
+         <children>
+            <VBox layoutX="72.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sunday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="sunMLVSub" onMouseClicked="#doubleClickRemove1M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="sunELVSub" onMouseClicked="#doubleClickRemove1E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="181.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Monday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="monMLVSub" onMouseClicked="#doubleClickRemove2M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="monELVSub" onMouseClicked="#doubleClickRemove2E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="290.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tuesday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="tueMLVSub" onMouseClicked="#doubleClickRemove3M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="tueELVSub" onMouseClicked="#doubleClickRemove3E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="399.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wednesday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="wedMLVSub" onMouseClicked="#doubleClickRemove4M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="wedELVSub" onMouseClicked="#doubleClickRemove4E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="508.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thursday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="thuMLVSub" onMouseClicked="#doubleClickRemove5M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="thuELVSub" onMouseClicked="#doubleClickRemove5E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="617.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Friday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="friMLVSub" onMouseClicked="#doubleClickRemove6M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="friELVSub" onMouseClicked="#doubleClickRemove6E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="726.0" layoutY="35.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saturday" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ListView fx:id="satMLVSub" onMouseClicked="#doubleClickRemove7M" prefHeight="130.0" prefWidth="110.0" />
+                  <ListView fx:id="satELVSub" onMouseClicked="#doubleClickRemove7E" prefHeight="130.0" prefWidth="110.0" />
+               </children>
+            </VBox>
+            <Text layoutX="318.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Next week shifts">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Text layoutX="18.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Morning" wrappingWidth="52.0" />
+            <Text layoutX="18.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evening" wrappingWidth="52.0" />
+            <Button layoutX="610.0" layoutY="333.0" mnemonicParsing="false" onAction="#publishBTN" text="publish shifts">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="115.0" layoutY="334.0" mnemonicParsing="false" onAction="#showBTN" prefHeight="39.0" prefWidth="130.0" text="back">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+
+</AnchorPane>

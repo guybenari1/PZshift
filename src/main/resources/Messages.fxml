@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="364.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.MessagesController">
+   <children>
+      <TextArea fx:id="messageTA" layoutX="25.0" layoutY="193.0" prefHeight="118.0" prefWidth="370.0" promptText="enter message content here" />
+      <ListView fx:id="employeesLV" layoutX="25.0" layoutY="88.0" onMouseClicked="#doubleClickAdd" prefHeight="72.0" prefWidth="117.0" />
+      <Text layoutX="25.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Messages">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text layoutX="25.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee's list:" />
+      <Text layoutX="169.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receivers list:" />
+      <Text layoutX="25.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write your message here:" />
+      <Button layoutX="170.0" layoutY="325.0" mnemonicParsing="false" onAction="#sendBTN" prefHeight="25.0" prefWidth="80.0" text="send" />
+      <ListView fx:id="receiversLV" layoutX="169.0" layoutY="88.0" onMouseClicked="#doubleClickRemove" prefHeight="72.0" prefWidth="117.0" />
+      <Button layoutX="315.0" layoutY="132.0" mnemonicParsing="false" onAction="#clearAllBTN" prefHeight="25.0" prefWidth="80.0" text="clear all" />
+      <Button layoutX="315.0" layoutY="88.0" mnemonicParsing="false" onAction="#addAllBTN" prefHeight="25.0" prefWidth="80.0" text="add all" />
+   </children>
+</AnchorPane>

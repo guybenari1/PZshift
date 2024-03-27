@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="250.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainAndControllers.SalaryController">
+   <children>
+      <Text layoutX="25.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose emploee:" wrappingWidth="101.4029541015625" />
+      <Text layoutX="25.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New hourly wage:" wrappingWidth="158.06964111328125" />
+      <ChoiceBox fx:id="employeeCB" layoutX="25.0" layoutY="98.0" prefHeight="25.0" prefWidth="177.0" />
+      <Button layoutX="25.0" layoutY="200.0" mnemonicParsing="false" onAction="#submitBTN" prefHeight="25.0" prefWidth="70.0" text="submit" />
+      <TextField fx:id="newSalaryTF" layoutX="25.0" layoutY="154.0" prefHeight="25.0" prefWidth="177.0" />
+      <Text layoutX="125.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="101.4029541015625" />
+      <Text layoutX="25.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary" wrappingWidth="101.4029541015625">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
